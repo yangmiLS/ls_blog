@@ -4,8 +4,8 @@
 
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="测试第一篇, 一个骚货">
-    <meta name="description" content="#首先,自己对这个行业的一些感悟吧,从开始的接口测试—&amp;gt;web测试—-&amp;gt;app测试—–&amp;gt;ui自动化测试,自己这一两年对一些测试的总结吧,自己从入行也对这个行业比较感兴趣,优质内容是一切的基础;##言归正传,很多人问我一些缓">
+    <meta name="keywords" content="测试第一篇-浅谈redis, 一个骚货">
+    <meta name="description" content="#有问题联系qq:2246396553{欢迎骚扰,如不及时请见量}#闲来之时,对于2019年即将结束,自己对这个行业的一些感悟吧,从开始的接口测试—&amp;gt;web测试—-&amp;gt;app测试—–&amp;gt;ui自动化测试,自己这一两年对一些测试的">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +13,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>测试第一篇 | ls_blog</title>
+    <title>测试第一篇-浅谈redis | ls_blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -304,13 +304,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        测试第一篇
+                        测试第一篇-浅谈redis
                     </div>
                 </div>
             </div>
@@ -449,7 +449,7 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>#首先,自己对这个行业的一些感悟吧,从开始的接口测试—&gt;web测试—-&gt;app测试—–&gt;ui自动化测试,自己这一两年对一些测试的总结吧,自己从入行也对这个行业比较感兴趣,优质内容是一切的基础;<br>##言归正传,很多人问我一些缓存方面的问题,其实自己在面对这些问题去多问自己为什么,为甚么需要去使用redis;其实在项目中使用redis我主要考虑两个方面,<strong>一是性能,二是并发</strong>,当然redis还具备分布锁等功能 ,像一些sql经常需要查询,耗时较旧,这样比较适合放入缓存 ,并发:在大并发的情况下,所有的请求直接访问数据库,数据库这时候会出现连接异常,或者cpu过高直接导致数据库异常,这个时候用redis作为缓存(操作),这时候直接经过缓存,减少数据库压力<br>###实际经历<br>#select * from uuser_game_role where  roleid=1 and appid=1 and serverID=1 and channelID=1 ORDER BY ctime desc由于开发这条慢sql导致数据库cpu过高,数据库连接异常;当然对于查询数据量的大的sql,对于开发的写的sql都要仔细的去分析sql,而不是没有命中索引去全表搜索;</p>
+                <p>#有问题联系qq:2246396553{欢迎骚扰,如不及时请见量}<br>#闲来之时,对于2019年即将结束,自己对这个行业的一些感悟吧,从开始的接口测试—&gt;web测试—-&gt;app测试—–&gt;ui自动化测试,自己这一两年对一些测试的总结吧,自己从入行也对这个行业比较感兴趣,优质内容是一切的基础;<br>##言归正传,很多人问我一些缓存方面的问题,其实自己在面对这些问题去多问自己为什么,为甚么需要去使用redis;其实在项目中使用redis我主要考虑两个方面,<strong>一是性能,二是并发</strong>,当然redis还具备分布锁等功能 ,像一些sql经常需要查询,耗时较旧,这样比较适合放入缓存 ,并发:在大并发的情况下,所有的请求直接访问数据库,数据库这时候会出现连接异常,或者cpu过高直接导致数据库异常,这个时候用redis作为缓存(操作),这时候直接经过缓存,减少数据库压力<br>###实际经历<br>#select * from uuser_game_role where  roleid=1 and appid=1 and serverID=1 and channelID=1 ORDER BY ctime desc由于开发这条慢sql导致数据库cpu过高,数据库连接异常;当然对于查询数据量的大的sql,对于开发的写的sql都要仔细的去分析sql,而不是没有命中索引去全表搜索;<br>#当然redis涉及到数据类型string,hash,list,set,sort,今天对于自己的理解主要讲下hash吧,hash存储主要有两种方式,第一种把其它信息封装成一个对象已序列化的方式存储eg:hash类型是一个键值对(key-value形式),例如存取一位订单的信息可以key(orderid),序列化的value对订单存订单信息,当然这种方式主要缺点增加的序列化/反序列化的开销-{主要是因为修改其中一项信息,需要把整个对象收回};第二种key -filed-value,这个角色对象有多少成员就存取多少个key-value{Redis的Hash实际是内部存储的Value为一个HashMap};实际上用哪种方式完全取决于你的业务应用场景;<br>当然网上也有一些比较好的问题”某明星发布恋情,动不动微博就崩溃;但这并不是redis缓存技术导致,由于转发+评论量非常的大,导致同一时间段高并发.<br>#1.redis扩容可能导致缓存数据失效(取模)<br>2.缓存穿透,查询一个不存在的数据,由于缓存缓存是不命中时被动写入的,如果从存储层查不到,则不写入缓存,其结果是导致这个不存在的数据每次都到数据库去查询,失去了缓存的意义,流量大的时候DB可能挂掉.&gt;  当然解决方式eg:1)不存在的数据用拦截器拦截掉2)如果查询返回的数据为空,我们可以把这个空结果进行缓存,对于过期时间可以自己设置为5分钟’<br>3.</p>
 
             </div>
             <hr/>
@@ -611,7 +611,7 @@
             </div>
             <br/>
             <a  href="/2019/06/21/firstblog/">
-                    《测试第一篇》
+                    《测试第一篇-浅谈redis》
             </a> 由
             <a href="https://yangmils.github.io">
                 lusheng
@@ -661,15 +661,15 @@
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="测试第一篇">
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="测试第一篇-浅谈redis">
                         
-                        <span class="card-title">测试第一篇</span>
+                        <span class="card-title">测试第一篇-浅谈redis</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            #首先,自己对这个行业的一些感悟吧,从开始的接口测试—&gt;web测试—-&gt;app测试—–&gt;ui自动化测试,自己这一两年对一些测试的总结吧,自己从入行也对这个行业比较感兴趣,优质内容是一切的基础;##言归正传,很多人问我一些缓
+                            #有问题联系qq:2246396553{欢迎骚扰,如不及时请见量}#闲来之时,对于2019年即将结束,自己对这个行业的一些感悟吧,从开始的接口测试—&gt;web测试—-&gt;app测试—–&gt;ui自动化测试,自己这一两年对一些测试的
                         
                     </div>
                     <div class="publish-info">
@@ -699,15 +699,15 @@
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="测试第一篇">
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="测试第一篇-浅谈redis">
                         
-                        <span class="card-title">测试第一篇</span>
+                        <span class="card-title">测试第一篇-浅谈redis</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            #首先,自己对这个行业的一些感悟吧,从开始的接口测试—&gt;web测试—-&gt;app测试—–&gt;ui自动化测试,自己这一两年对一些测试的总结吧,自己从入行也对这个行业比较感兴趣,优质内容是一切的基础;##言归正传,很多人问我一些缓
+                            #有问题联系qq:2246396553{欢迎骚扰,如不及时请见量}#闲来之时,对于2019年即将结束,自己对这个行业的一些感悟吧,从开始的接口测试—&gt;web测试—-&gt;app测试—–&gt;ui自动化测试,自己这一两年对一些测试的
                         
                     </div>
                     <div class="publish-info">
