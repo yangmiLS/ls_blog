@@ -449,8 +449,7 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>#首先,自己对这个行业的一些感悟吧,从开始的接口测试—&gt;web测试—-&gt;app测试—–&gt;ui自动化测试,自己这一两年对一些测试的总结吧,自己从入行也对这个行业比较感兴趣,优质内容是一切的基础;<br>##言归正传,很多人问我一些缓存方面的问题,其实自己在面对这些问题去多问自己为什么,为甚么需要去使用redis;其实在项目中使用redis我主要考虑两个方面,<strong>一是性能,二是并发</strong>,当然redis还具备分布锁等功能 ,像一些sql经常需要查询,耗时较旧,这样比较适合放入缓存 ,并发:在大并发的情况下,所有的请求直接访问数据库,数据库这时候会出现连接异常,或者cpu过高直接导致数据库异常,这个时候用redis作为缓存(操作),这时候直接经过缓存,减少数据库压力<br>###实际经历</p>
-<h1 id="color-red-select-from-uuser-game-role-where-roleid-1-and-appid-1-and-serverID-1-and-channelID-1-ORDER-BY-ctime-desc"><a href="#color-red-select-from-uuser-game-role-where-roleid-1-and-appid-1-and-serverID-1-and-channelID-1-ORDER-BY-ctime-desc" class="headerlink" title="$\color{red}{select * from uuser_game_role where  roleid=1 and appid=1 and serverID=1 and channelID=1 ORDER BY ctime desc}$"></a>$\color{red}{select * from uuser_game_role where  roleid=1 and appid=1 and serverID=1 and channelID=1 ORDER BY ctime desc}$</h1><p>由于开发这条慢sql导致数据库cpu过高,数据库连接异常;当然对于查询数据量的大的sql,对于开发的写的sql都要仔细的去分析sql,而不是没有命中索引去全表搜索;</p>
+                <p>#首先,自己对这个行业的一些感悟吧,从开始的接口测试—&gt;web测试—-&gt;app测试—–&gt;ui自动化测试,自己这一两年对一些测试的总结吧,自己从入行也对这个行业比较感兴趣,优质内容是一切的基础;<br>##言归正传,很多人问我一些缓存方面的问题,其实自己在面对这些问题去多问自己为什么,为甚么需要去使用redis;其实在项目中使用redis我主要考虑两个方面,<strong>一是性能,二是并发</strong>,当然redis还具备分布锁等功能 ,像一些sql经常需要查询,耗时较旧,这样比较适合放入缓存 ,并发:在大并发的情况下,所有的请求直接访问数据库,数据库这时候会出现连接异常,或者cpu过高直接导致数据库异常,这个时候用redis作为缓存(操作),这时候直接经过缓存,减少数据库压力<br>###实际经历<br>#select * from uuser_game_role where  roleid=1 and appid=1 and serverID=1 and channelID=1 ORDER BY ctime desc由于开发这条慢sql导致数据库cpu过高,数据库连接异常;当然对于查询数据量的大的sql,对于开发的写的sql都要仔细的去分析sql,而不是没有命中索引去全表搜索;</p>
 
             </div>
             <hr/>
