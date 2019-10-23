@@ -4,8 +4,9 @@
 
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="测试第一篇-浅谈redis, 一个骚货">
-    <meta name="description" content="有问题联系qq:2246396553{欢迎骚扰,如不及时请见量}#闲来之时,对于2019年即将结束,自己对这个行业的一些感悟吧,从开始的接口测试—&amp;gt;web测试—-&amp;gt;app测试—–&amp;gt;ui自动化测试,自己这一两年对一些测试的总">
+    <meta name="keywords" content="测试第二篇-浏览器原理, 一个骚货">
+    <meta name="description" content="#前端web测试需要注意的点–前言
+浏览器目前重要性还在加强,当然不止pc端,很多移动端应用都内嵌web页面;eg谷歌新推出的PWA技术,让web应用跟接近原生应用,其实在我们公司那时候做H5sdk集成游戏时,pwa 基于 Service ">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +14,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>测试第一篇-浅谈redis | ls_blog</title>
+    <title>测试第二篇-浏览器原理 | ls_blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -304,13 +305,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        测试第一篇-浅谈redis
+                        测试第二篇-浏览器原理
                     </div>
                 </div>
             </div>
@@ -433,7 +434,7 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-06-21
+                    2019-07-13
                 </div>
 
                 
@@ -449,9 +450,10 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="有问题联系qq-2246396553-欢迎骚扰-如不及时请见量"><a href="#有问题联系qq-2246396553-欢迎骚扰-如不及时请见量" class="headerlink" title="有问题联系qq:2246396553{欢迎骚扰,如不及时请见量}"></a><font color="red">有问题联系qq:2246396553{欢迎骚扰,如不及时请见量}</font></h1><p>#闲来之时,对于2019年即将结束,自己对这个行业的一些感悟吧,从开始的接口测试—&gt;web测试—-&gt;app测试—–&gt;ui自动化测试,自己这一两年对一些测试的总结吧,自己从入行也对这个行业比较感兴趣,优质内容是一切的基础;<br>##言归正传,很多人问我一些缓存方面的问题,其实自己在面对这些问题去多问自己为什么,为甚么需要去使用redis;其实在项目中使用redis我主要考虑两个方面,<strong>一是性能,二是并发</strong>,当然redis还具备分布锁等功能 ,像一些sql经常需要查询,耗时较旧,这样比较适合放入缓存 ,并发:在大并发的情况下,所有的请求直接访问数据库,数据库这时候会出现连接异常,或者cpu过高直接导致数据库异常,这个时候用redis作为缓存(操作),这时候直接经过缓存,减少数据库压力<br>###实际经历<br>#select * from uuser_game_role where  roleid=1 and appid=1 and serverID=1 and channelID=1 ORDER BY ctime desc由于开发这条慢sql导致数据库cpu过高,数据库连接异常;当然对于查询数据量的大的sql,对于开发的写的sql都要仔细的去分析sql,而不是没有命中索引去全表搜索;<br>#当然redis涉及到数据类型string,hash,list,set,sort,今天对于自己的理解主要讲下hash吧,hash存储主要有两种方式,第一种把其它信息封装成一个对象已序列化的方式存储eg:hash类型是一个键值对(key-value形式),例如存取一位订单的信息可以key(orderid),序列化的value对订单存订单信息,当然这种方式主要缺点增加的序列化/反序列化的开销-{主要是因为修改其中一项信息,需要把整个对象收回};第二种key -filed-value,这个角色对象有多少成员就存取多少个key-value{Redis的Hash实际是内部存储的Value为一个HashMap};实际上用哪种方式完全取决于你的业务应用场景;<br>当然网上也有一些比较好的问题”某明星发布恋情,动不动微博就崩溃;但这并不是redis缓存技术导致,由于转发+评论量非常的大,导致同一时间段高并发.<br>#<font color="red">1.redis扩容可能导致缓存数据失效(取模)</font><br>2.缓存穿透,查询一个不存在的数据,由于缓存缓存是不命中时被动写入的,如果从存储层查不到,则不写入缓存,其结果是导致这个不存在的数据每次都到数据库去查询,失去了缓存的意义,流量大的时候DB可能挂掉.&gt;  当然解决方式eg:1)不存在的数据用拦截器拦截掉2)如果查询返回的数据为空,我们可以把这个空结果进行缓存,对于过期时间可以自己设置为5分钟’<br>3.缓存击穿,对于一些设置了热点key,如果这些key可能会在某些时间被超高并发访问,可能会把DB压垮<br>4.缓存雪崩指的是设置缓存采用了相同的过期时间或者其它情况,导致缓存某一时刻同时失效,DB压力过大雪崩<br>5.redis集群缓存测试总结<br>—上线需要注意老代码读新缓存是否有问题,新代码读新缓存;缓存反序列化的问题(不同服务的方式不一样)<br>—DB事务性回滚,缓存是否会滚,有没有脏数据<br>—注意线上预发(redis是否同一库服务器上,注意区分),还有测试环境的区别.<br>—有些缓存合理的设置过期时间<br>—哪些操作会删除缓存,哪些操作会set缓存<br>redis使用命令可以直接get hget hgetall在服务器上,或者桌面工具RedisDesktopManager,针对那个服务(ping域名)<br>5.4 redis持久化(内存数据保存到硬盘)<br>RDB和AOF作用:可以有效防止,在redis宕机后,缓存失效的问题</p>
-<p>#&lt;单个Redis server对请求的处理是基于单线程工作模型的，但由于是纯内存操作，并且单线程的工作模式避免了线程上下文切换带来的额外开销，同时使用NIO多路复用机制（单线程维护多个I/O socket的状态，socket event handler统一进行event分发，并通知到各个event listener），所以即使是单台Redis server的性能也是非常的快，可支持11万次/秒的SET操作，8.1万次/秒的GET操作&gt;<br>ttl key<br>ttl命令返回值是键的剩余时间（单位是秒）。当键不存在时，ttl命令会返回-2。没有为键设置过期时间（即永久存在，这是建立一个键后的默认情况）返回-1</p>
-<p>预发和线上用同一套redis        线上是旧代码,怕序列化失败[都是先执行sql–然后部署服务,预发删一个缓存测试下<br>redis序列化::—-序列化的好处<br>–1–永久性保存对象，保存对象的字节序列到本地文件或者数据库中，实现了数据的持久化，通过序列化可以把数据永久的保存到硬盘上，<br>–2–利用序列化实现远程通信，可以在网络上传送对象的字节序列。<br>–3–在进程间传递对象<br>最近导出excel会出现超时的情况，初步判断是数据增长太快，数据量太大，请求时间超过了设置的超时时间<br>重点是在于采用了异步的思想取代原来同步的流程，这样请求就不会出现超时的情况，无论处理多久都木有关系　　　<br>这里采用redis来记录也是考虑到下载会有一个过期时间,一个请求可能过一段时间就无效,未完待续……………….</p>
+                <p>#<font color="red">前端web测试需要注意的点</font><br>–前言</p>
+<table><tr><td bgcolor="yellow">浏览器目前重要性还在加强,当然不止pc端,很多移动端应用都内嵌web页面;eg谷歌新推出的PWA技术,让web应用跟接近原生应用,其实在我们公司那时候做H5sdk集成游戏时,pwa 基于 Service Worker 运行////  Service Worker的运行环境要么是本地服务。要么是https目前我们的服务是http那么pwa不适合我们的系统,暂时也没找到关于pwa对http的支持方案;那时候就没使用PWA技术</td></tr></table>
+
+<p>1.自己对浏览器的一些初步了解,浏览器主要也涉及到了很多概念</p>
 
             </div>
             <hr/>
@@ -612,8 +614,8 @@
                 </a>
             </div>
             <br/>
-            <a  href="/2019/06/21/firstblog/">
-                    《测试第一篇-浅谈redis》
+            <a  href="/2019/07/13/twoblog/">
+                    《测试第二篇-浏览器原理》
             </a> 由
             <a href="https://yangmils.github.io">
                 lusheng
@@ -654,9 +656,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2019/07/13/twoblog/">
                     <div class="card-image">
@@ -675,9 +678,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2019-07-13
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-07-13
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -686,6 +689,7 @@
                         </span>
                     </div>
                 </div>
+
                 
             </div>
         </div>
@@ -693,7 +697,7 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
                 <a href="/2019/06/21/firstblog/">
@@ -723,7 +727,6 @@
                         </span>
                     </div>
                 </div>
-
                 
             </div>
         </div>
